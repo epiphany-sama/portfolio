@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nazil Ishaq — Backend Developer</title>
+  <meta name="description" content="Backend developer specialising in Python, Django, FastAPI, PostgreSQL, and AI integration." />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #0d1117; color: #e6edf3; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; }
+
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 0.5px solid #30363d; position: sticky; top: 0; background: #0d1117; z-index: 100; }
+    .nav-logo { font-size: 16px; font-weight: 500; color: #58a6ff; text-decoration: none; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { color: #8b949e; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: #e6edf3; }
+
+    .hero { padding: 6rem 2rem 5rem; text-align: center; }
+    .hero-tag { font-size: 13px; color: #58a6ff; letter-spacing: 0.05em; margin-bottom: 1rem; }
+    .hero h1 { font-size: 52px; font-weight: 500; color: #e6edf3; margin-bottom: 1.25rem; line-height: 1.1; }
+    .hero h1 span { color: #58a6ff; }
+    .hero p { font-size: 17px; color: #8b949e; max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: #58a6ff; color: #0d1117; padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 500; border: none; cursor: pointer; text-decoration: none; }
+    .btn-secondary { background: transparent; color: #e6edf3; padding: 10px 24px; border-radius: 6px; font-size: 14px; border: 0.5px solid #30363d; cursor: pointer; text-decoration: none; transition: border-color 0.2s; }
+    .btn-secondary:hover { border-color: #58a6ff; }
+
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #30363d; border-top: 0.5px solid #30363d; border-bottom: 0.5px solid #30363d; }
+    .stat { background: #0d1117; padding: 1.5rem 1rem; text-align: center; }
+    .stat-num { font-size: 28px; font-weight: 500; color: #58a6ff; }
+    .stat-label { font-size: 12px; color: #8b949e; margin-top: 4px; }
+
+    .section { padding: 4rem 2rem; text-align: center; }
+    .section-title { font-size: 15px; color: #58a6ff; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .section-heading { font-size: 22px; font-weight: 500; color: #e6edf3; margin-bottom: 2rem; }
+
+    .skills-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; justify-content: center; }
+    .filter-btn { background: transparent; border: 0.5px solid #30363d; color: #8b949e; padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+    .filter-btn.active, .filter-btn:hover { border-color: #58a6ff; color: #58a6ff; background: rgba(88,166,255,0.08); }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; }
+    .skill-card { background: #161b22; border: 0.5px solid #30363d; border-radius: 10px; padding: 1.5rem 1rem 1rem; text-align: center; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-height: 100px; }
+    .skill-card:hover { border-color: #58a6ff; transform: translateY(-3px); background: #1c2230; }
+    .skill-card.hidden { display: none; }
+    .skill-card i { font-size: 24px; color: #58a6ff; }
+    .skill-card .skill-name { font-size: 13px; color: #e6edf3; font-weight: 500; }
+    .skill-badge { font-size: 10px; color: #58a6ff; background: rgba(88,166,255,0.1); border: 0.5px solid rgba(88,166,255,0.2); padding: 2px 8px; border-radius: 20px; opacity: 0; transform: translateY(4px); transition: all 0.2s; white-space: nowrap; }
+    .skill-card:hover .skill-badge { opacity: 1; transform: translateY(0); }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; text-align: left; }
+    .project-card { background: #161b22; border: 0.5px solid #30363d; border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s; }
+    .project-card:hover { border-color: #58a6ff; }
+    .project-tag { font-size: 11px; color: #58a6ff; background: rgba(88,166,255,0.1); padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 12px; }
+    .project-card h3 { font-size: 15px; font-weight: 500; color: #e6edf3; margin-bottom: 8px; }
+    .project-card p { font-size: 13px; color: #8b949e; line-height: 1.6; margin-bottom: 1rem; }
+    .project-links { display: flex; gap: 12px; }
+    .project-links a { font-size: 13px; color: #58a6ff; text-decoration: none; }
+    .project-links a:hover { text-decoration: underline; }
+
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; text-align: left; }
+    .process-card { background: #161b22; border: 0.5px solid #30363d; border-radius: 12px; padding: 1.25rem; }
+    .process-num { font-size: 11px; color: #58a6ff; margin-bottom: 8px; letter-spacing: 0.05em; }
+    .process-card h3 { font-size: 14px; font-weight: 500; color: #e6edf3; margin-bottom: 6px; }
+    .process-card p { font-size: 12px; color: #8b949e; line-height: 1.6; }
+
+    .faq { padding: 4rem 2rem; border-top: 0.5px solid #30363d; text-align: center; }
+    .faq-list { max-width: 640px; margin: 0 auto; text-align: left; }
+    .faq-item { border-bottom: 0.5px solid #30363d; padding: 1rem 0; cursor: pointer; }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #e6edf3; }
+    .faq-q i { font-size: 16px; color: #8b949e; transition: transform 0.2s; }
+    .faq-a { font-size: 13px; color: #8b949e; line-height: 1.7; margin-top: 10px; display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-q i { transform: rotate(45deg); }
+
+    .contact { padding: 4rem 2rem; text-align: center; border-top: 0.5px solid #30363d; }
+    .contact p { color: #8b949e; font-size: 14px; margin-bottom: 1.5rem; max-width: 400px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+    .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .contact-link { display: flex; align-items: center; gap: 6px; color: #8b949e; text-decoration: none; font-size: 14px; border: 0.5px solid #30363d; padding: 8px 16px; border-radius: 6px; transition: all 0.2s; }
+    .contact-link:hover { border-color: #58a6ff; color: #58a6ff; }
+
+    .divider { border: none; border-top: 0.5px solid #30363d; margin: 0; }
+    .footer { text-align: center; padding: 1.5rem; font-size: 12px; color: #484f58; border-top: 0.5px solid #30363d; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 15px; }
+      .stats-row { grid-template-columns: repeat(3, 1fr); }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-logo" href="#">nazil.dev</a>
+    <div class="nav-links">
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-tag">backend developer</p>
+    <h1>Scalable APIs, clean code,<br>real <span>deployments.</span></h1>
+    <p>I build REST APIs, databases, and automation systems using Python, Django, FastAPI, and PostgreSQL. Production-ready from day one.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">view projects</a>
+      <a href="https://github.com/epiphany-sama" class="btn-secondary" target="_blank">github</a>
+    </div>
+  </section>
+
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">2+</div><div class="stat-label">years technical work</div></div>
+    <div class="stat"><div class="stat-num">8+</div><div class="stat-label">projects built</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">remote ready</div></div>
+  </div>
+
+  <section class="section" id="skills">
+    <p class="section-title">what i work with</p>
+    <h2 class="section-heading">skills</h2>
+    <div class="skills-filter">
+      <button class="filter-btn active" data-filter="all">all</button>
+      <button class="filter-btn" data-filter="backend">backend</button>
+      <button class="filter-btn" data-filter="frontend">frontend</button>
+      <button class="filter-btn" data-filter="devops">devops</button>
+      <button class="filter-btn" data-filter="database">database</button>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card" data-cat="backend"><i class="ti ti-brand-python" aria-hidden="true"></i><div class="skill-name">Python</div><div class="skill-badge">backend</div></div>
+      <div class="skill-card" data-cat="backend"><i class="ti ti-api" aria-hidden="true"></i><div class="skill-name">FastAPI</div><div class="skill-badge">APIs</div></div>
+      <div class="skill-card" data-cat="backend"><i class="ti ti-brand-django" aria-hidden="true"></i><div class="skill-name">Django</div><div class="skill-badge">DRF</div></div>
+      <div class="skill-card" data-cat="backend"><i class="ti ti-mail" aria-hidden="true"></i><div class="skill-name">Automation</div><div class="skill-badge">workflows</div></div>
+      <div class="skill-card" data-cat="database"><i class="ti ti-database" aria-hidden="true"></i><div class="skill-name">PostgreSQL</div><div class="skill-badge">queries</div></div>
+      <div class="skill-card" data-cat="database"><i class="ti ti-database" aria-hidden="true"></i><div class="skill-name">SQLAlchemy</div><div class="skill-badge">ORM</div></div>
+      <div class="skill-card" data-cat="frontend"><i class="ti ti-brand-html5" aria-hidden="true"></i><div class="skill-name">HTML5</div><div class="skill-badge">markup</div></div>
+      <div class="skill-card" data-cat="frontend"><i class="ti ti-brand-css3" aria-hidden="true"></i><div class="skill-name">CSS3</div><div class="skill-badge">styling</div></div>
+      <div class="skill-card" data-cat="frontend"><i class="ti ti-brand-react" aria-hidden="true"></i><div class="skill-name">React</div><div class="skill-badge">UI</div></div>
+      <div class="skill-card" data-cat="frontend"><i class="ti ti-brand-javascript" aria-hidden="true"></i><div class="skill-name">JavaScript</div><div class="skill-badge">ES6+</div></div>
+      <div class="skill-card" data-cat="devops"><i class="ti ti-brand-docker" aria-hidden="true"></i><div class="skill-name">Docker</div><div class="skill-badge">containers</div></div>
+      <div class="skill-card" data-cat="devops"><i class="ti ti-brand-git" aria-hidden="true"></i><div class="skill-name">Git</div><div class="skill-badge">CI/CD</div></div>
+      <div class="skill-card" data-cat="backend"><i class="ti ti-sparkles" aria-hidden="true"></i><div class="skill-name">AI APIs</div><div class="skill-badge">prompt eng</div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section" id="projects">
+    <p class="section-title">what i have built</p>
+    <h2 class="section-heading">projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <span class="project-tag">backend</span>
+        <h3>Student Management Platform</h3>
+        <p>Multi-institution student data platform with Django, DRF, PostgreSQL, Docker, and CI/CD in production. NDA project.</p>
+        <div class="project-links">
+          <span style="font-size: 13px; color: #8b949e;">Private repository</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">fullstack</span>
+        <h3>Truth or Dare Web App</h3>
+        <p>Full-stack web game with Django backend, PostgreSQL, user auth, and AJAX frontend. Live deployment with real-time gameplay.</p>
+        <div class="project-links">
+          <a href="https://truda-1-gl2g.onrender.com" target="_blank">live demo</a>
+          <a href="https://github.com/epiphany-sama/truth-or-dare" target="_blank">github</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">backend</span>
+        <h3>Email Automation System</h3>
+        <p>Automated email dispatch system using Python, smtplib, and scheduled workflows for sending emails based on data.</p>
+        <div class="project-links">
+          <a href="https://github.com/epiphany-sama/email-automation" target="_blank">github</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">backend</span>
+        <h3>Authentication and Verification System</h3>
+        <p>Multi-stage authentication workflows with Django REST Framework, Gmail API integration, and email verification. NDA project.</p>
+        <div class="project-links">
+          <span style="font-size: 13px; color: #8b949e;">Private repository</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">backend</span>
+        <h3>Video Communication Plugin</h3>
+        <p>Third-party video integration using FastAPI and Daily.co for real-time communication features. NDA project.</p>
+        <div class="project-links">
+          <span style="font-size: 13px; color: #8b949e;">Private repository</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">backend</span>
+        <h3>Face Detector</h3>
+        <p>Computer vision project for detecting and identifying faces in images and video streams.</p>
+        <div class="project-links">
+          <a href="https://github.com/epiphany-sama/face-detector" target="_blank">github</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">backend</span>
+        <h3>Web Scraper</h3>
+        <p>Python web scraper using BeautifulSoup and requests to extract data from websites.</p>
+        <div class="project-links">
+          <a href="https://github.com/epiphany-sama/Web-scraper" target="_blank">github</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <p class="section-title">how i work</p>
+    <h2 class="section-heading">process</h2>
+    <div class="process-grid">
+      <div class="process-card"><div class="process-num">01</div><h3>understand</h3><p>Break down requirements, define scope, plan the solution.</p></div>
+      <div class="process-card"><div class="process-num">02</div><h3>design</h3><p>Schema design, API structure, security considerations.</p></div>
+      <div class="process-card"><div class="process-num">03</div><h3>build</h3><p>Clean code, proper error handling, comprehensive testing.</p></div>
+      <div class="process-card"><div class="process-num">04</div><h3>deploy</h3><p>Docker containerised, CI/CD pipeline, live and production ready.</p></div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <p class="section-title">common questions</p>
+    <h2 class="section-heading">faq</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">What kind of roles are you open to? <i class="ti ti-plus"></i></div>
+        <div class="faq-a">Backend, fullstack, and AI-related roles. Remote, contract, and full-time positions. Also open to freelance work and evaluations.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What is your preferred stack? <i class="ti ti-plus"></i></div>
+        <div class="faq-a">Python with FastAPI or Django on the backend, PostgreSQL for databases, Docker for containerisation. Frontend with JavaScript, HTML, CSS.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you have AI or ML experience? <i class="ti ti-plus"></i></div>
+        <div class="faq-a">Yes, I have evaluated AI outputs from ChatGPT, Gemini, and Claude using structured rubrics. Experience with LLM APIs, prompt engineering, and AI integration.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Are you available for freelance or contract work? <i class="ti ti-plus"></i></div>
+        <div class="faq-a">Yes, open to freelance projects, contract work, and evaluations. Let me know the details and we can discuss timelines.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <p class="section-title">get in touch</p>
+    <h2 class="section-heading">contact</h2>
+    <p>Open to backend, fullstack, and AI roles. Feel free to reach out via email, GitHub, or LinkedIn.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:ishaqnazil16@gmail.com"><i class="ti ti-mail" aria-hidden="true"></i> email</a>
+      <a class="contact-link" href="https://linkedin.com/in/nazil-ishaq" target="_blank"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> linkedin</a>
+      <a class="contact-link" href="https://github.com/epiphany-sama" target="_blank"><i class="ti ti-brand-github" aria-hidden="true"></i> github</a>
+    </div>
+  </section>
+
+  <div class="footer">© 2026 Nazil Ishaq. built with intention.</div>
+
+  <script>
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => item.classList.toggle('open'));
+    });
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.skill-card').forEach(card => {
+          if (filter === 'all' || card.dataset.cat === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
