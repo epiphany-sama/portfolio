@@ -3,99 +3,265 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Developer</title>
-  <meta name="description" content="Full-stack developer specialising in Python, Django, FastAPI, React PostgreSQL, and AI integration." />
+  <title>Web Developer</title>
+  <meta name="description" content="Backend developer specialising in Python, Django, FastAPI, PostgreSQL, and AI integration." />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&family=Orbitron:wght@400;700;900&family=Merienda:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { background: #0d1117; color: #e6edf3; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; }
+    
+    :root {
+      --bg-dark: #0d1117;
+      --text-light: #e6edf3;
+      --accent: #58a6ff;
+      --border: #30363d;
+    }
 
-    .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 0.5px solid #30363d; position: sticky; top: 0; background: #0d1117; z-index: 100; }
-    .nav-logo { font-size: 16px; font-weight: 500; color: #58a6ff; text-decoration: none; }
+    body{
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Rajdhani', sans-serif;
+    }
+
+    .nav { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 1rem 2rem; 
+      border-bottom: 0.5px solid var(--border); 
+      position: sticky; 
+      top: 0; 
+      background: var(--bg-dark); 
+      z-index: 100;
+    }
+
+    .nav-logo { font-size: 16px; font-weight: 500; color: var(--accent); text-decoration: none; }
+    
     .nav-links { display: flex; gap: 1.5rem; }
     .nav-links a { color: #8b949e; text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .nav-links a:hover { color: #e6edf3; }
+    .nav-links a:hover { color: var(--text-light); }
+
+    .hamburger { display: none; background: none; border: none; color: var(--accent); cursor: pointer; font-size: 24px; }
+
+    .nav-dropdown { display: none; position: absolute; top: 60px; right: 20px; background: #161b22; border: 0.5px solid var(--border); border-radius: 6px; flex-direction: column; gap: 0; z-index: 200; }
+    .nav-dropdown.open { display: flex; }
+    .nav-dropdown a { padding: 12px 20px; color: #8b949e; text-decoration: none; font-size: 14px; border-bottom: 0.5px solid var(--border); transition: color 0.2s; }
+    .nav-dropdown a:last-child { border-bottom: none; }
+    .nav-dropdown a:hover { color: var(--text-light); background: #1c2230; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
 
     .hero { padding: 6rem 2rem 5rem; text-align: center; }
-    .hero-tag { font-size: 13px; color: #58a6ff; letter-spacing: 0.05em; margin-bottom: 1rem; }
-    .hero h1 { font-size: 52px; font-weight: 500; color: #e6edf3; margin-bottom: 1.25rem; line-height: 1.1; }
-    .hero h1 span { color: #58a6ff; }
-    .hero p { font-size: 17px; color: #8b949e; max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
-    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary { background: #58a6ff; color: #0d1117; padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 500; border: none; cursor: pointer; text-decoration: none; }
-    .btn-secondary { background: transparent; color: #e6edf3; padding: 10px 24px; border-radius: 6px; font-size: 14px; border: 0.5px solid #30363d; cursor: pointer; text-decoration: none; transition: border-color 0.2s; }
-    .btn-secondary:hover { border-color: #58a6ff; }
+    .hero-tag { font-size: 13px; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 1rem; }
+    .hero h1 { font-size: 52px; font-weight: 500; color: var(--text-light); margin-bottom: 1.25rem; line-height: 1.1; font-family: 'Orbitron', sans-serif; animation: slideDown 0.8s ease-out; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { font-size: 17px; color: #8b949e; max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; animation: fadeInUp 0.8s ease-out 0.2s both; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.8s ease-out 0.4s both; }
+    .btn-primary { background: var(--accent); color: var(--bg-dark); padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 500; border: none; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+    .btn-primary:hover{ transform:translateY(-4px) scale(1.03); box-shadow:0 12px 24px rgba(88,166,255,.35); }
+    .btn-secondary { background: transparent; color: var(--text-light); padding: 10px 24px; border-radius: 6px; font-size: 14px; border: 0.5px solid var(--border); cursor: pointer; text-decoration: none; transition: all 0.2s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #30363d; border-top: 0.5px solid #30363d; border-bottom: 0.5px solid #30363d; }
-    .stat { background: #0d1117; padding: 1.5rem 1rem; text-align: center; }
-    .stat-num { font-size: 28px; font-weight: 500; color: #58a6ff; }
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); animation: fadeInUp 0.8s ease-out 0.6s both; }
+    .stat { background: var(--bg-dark); padding: 1.5rem 1rem; text-align: center; }
+    .stat-num{ font-family:'Orbitron',sans-serif; font-size:28px; font-weight:500; color:var(--accent);}
     .stat-label { font-size: 12px; color: #8b949e; margin-top: 4px; }
 
     .section { padding: 4rem 2rem; text-align: center; }
-    .section-title { font-size: 15px; color: #58a6ff; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-    .section-heading { font-size: 22px; font-weight: 500; color: #e6edf3; margin-bottom: 2rem; }
+    .section-title { font-size: 15px; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .section-heading { font-size: 22px; font-weight: 500; color: var(--text-light); margin-bottom: 2rem; font-family: 'Orbitron', sans-serif; }
 
     .skills-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; justify-content: center; }
-    .filter-btn { background: transparent; border: 0.5px solid #30363d; color: #8b949e; padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
-    .filter-btn.active, .filter-btn:hover { border-color: #58a6ff; color: #58a6ff; background: rgba(88,166,255,0.08); }
+    .filter-btn { background: transparent; border: 0.5px solid var(--border); color: #8b949e; padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+    .filter-btn.active, .filter-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(88, 166, 255, 0.08); }
 
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; }
-    .skill-card { background: #161b22; border: 0.5px solid #30363d; border-radius: 10px; padding: 1.5rem 1rem 1rem; text-align: center; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-height: 100px; }
-    .skill-card:hover { border-color: #58a6ff; transform: translateY(-3px); background: #1c2230; }
+    .skill-card{
+    transition:
+        opacity .3s,
+        transform .3s,
+        border-color .3s,
+        background .3s;
+}
+
+
+    
+    .skill-card.fade-in {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); background: #1c2230; }
     .skill-card.hidden { display: none; }
-    .skill-card i { font-size: 24px; color: #58a6ff; }
-    .skill-card .skill-name { font-size: 13px; color: #e6edf3; font-weight: 500; }
-    .skill-badge { font-size: 10px; color: #58a6ff; background: rgba(88,166,255,0.1); border: 0.5px solid rgba(88,166,255,0.2); padding: 2px 8px; border-radius: 20px; opacity: 0; transform: translateY(4px); transition: all 0.2s; white-space: nowrap; }
+    .skill-card i { font-size: 24px; color: var(--accent); }
+    .skill-card .skill-name { font-size: 13px; color: var(--text-light); font-weight: 500; font-family: 'Rajdhani', sans-serif; }
+    .skill-badge { font-size: 10px; color: var(--accent); background: rgba(88, 166, 255, 0.1); border: 0.5px solid rgba(88, 166, 255, 0.2); padding: 2px 8px; border-radius: 20px; opacity: 0; transform: translateY(4px); transition: all 0.2s; white-space: nowrap; }
     .skill-card:hover .skill-badge { opacity: 1; transform: translateY(0); }
 
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; text-align: left; }
-    .project-card { background: #161b22; border: 0.5px solid #30363d; border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s; }
-    .project-card:hover { border-color: #58a6ff; }
-    .project-tag { font-size: 11px; color: #58a6ff; background: rgba(88,166,255,0.1); padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 12px; }
-    .project-card h3 { font-size: 15px; font-weight: 500; color: #e6edf3; margin-bottom: 8px; }
+    .project-card { background: #161b22; border: 0.5px solid var(--border); border-radius: 12px; padding: 1.25rem; transition: all 0.3s; opacity: 0; }    
+    .project-card.fade-in { animation: slideInLeft 0.6s ease-out forwards; }
+    .project-card:hover{ border-color:var(--accent); transform:translateY(-6px) scale(1.02); box-shadow:0 14px 30px rgba(0,0,0,.35); }
+    .project-tag { font-size: 11px; color: var(--accent); background: rgba(88, 166, 255, 0.1); padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 12px; }
+    .project-card h3{ font-family:'Orbitron',sans-serif; font-size:15px; font-weight:500; color:var(--text-light); margin-bottom:6px;}
     .project-card p { font-size: 13px; color: #8b949e; line-height: 1.6; margin-bottom: 1rem; }
     .project-links { display: flex; gap: 12px; }
-    .project-links a { font-size: 13px; color: #58a6ff; text-decoration: none; }
+    .project-links a{ position:relative; color:var(--accent); text-decoration:none; transition:.3s;}
     .project-links a:hover { text-decoration: underline; }
+    .project-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-2px;
+    width:0;
+    height:1px;
+    background:var(--accent);
+    transition:.3s;
+}
+
+.project-links a:hover::after{
+    width:100%;
+}
 
     .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; text-align: left; }
-    .process-card { background: #161b22; border: 0.5px solid #30363d; border-radius: 12px; padding: 1.25rem; }
-    .process-num { font-size: 11px; color: #58a6ff; margin-bottom: 8px; letter-spacing: 0.05em; }
-    .process-card h3 { font-size: 14px; font-weight: 500; color: #e6edf3; margin-bottom: 6px; }
+    .process-card { 
+      background: #161b22; 
+      border: 0.5px solid var(--border); 
+      border-radius: 12px; 
+      padding: 1.25rem;
+      opacity: 0;
+    }
+    
+    .process-card.fade-in {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .process-num { font-size: 11px; color: var(--accent); margin-bottom: 8px; letter-spacing: 0.05em; }
+    .process-card h3{ font-family:'Orbitron',sans-serif; font-size:14px; font-weight:500; color:var(--text-light); margin-bottom:6px; }
+    .project-tech{ color:var(--accent); font-size:11px; margin-bottom:10px; letter-spacing:.04em; font-weight:600; }
     .process-card p { font-size: 12px; color: #8b949e; line-height: 1.6; }
 
-    .faq { padding: 4rem 2rem; border-top: 0.5px solid #30363d; text-align: center; }
+    .faq { padding: 4rem 2rem; border-top: 0.5px solid var(--border); text-align: center; }
     .faq-list { max-width: 640px; margin: 0 auto; text-align: left; }
-    .faq-item { border-bottom: 0.5px solid #30363d; padding: 1rem 0; cursor: pointer; }
-    .faq-q { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #e6edf3; }
+    .faq-item { border-bottom: 0.5px solid var(--border); padding: 1rem 0; cursor: pointer; opacity: 0; }
+    
+    .faq-item.fade-in { animation: fadeInUp 0.6s ease-out forwards; }
+    
+    .faq-q { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--text-light); }
     .faq-q i { font-size: 16px; color: #8b949e; transition: transform 0.2s; }
     .faq-a { font-size: 13px; color: #8b949e; line-height: 1.7; margin-top: 10px; display: none; }
     .faq-item.open .faq-a { display: block; }
     .faq-item.open .faq-q i { transform: rotate(45deg); }
 
-    .contact { padding: 4rem 2rem; text-align: center; border-top: 0.5px solid #30363d; }
+    .contact { padding: 4rem 2rem; text-align: center; border-top: 0.5px solid var(--border); }
     .contact p { color: #8b949e; font-size: 14px; margin-bottom: 1.5rem; max-width: 400px; margin-left: auto; margin-right: auto; line-height: 1.7; }
     .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .contact-link { display: flex; align-items: center; gap: 6px; color: #8b949e; text-decoration: none; font-size: 14px; border: 0.5px solid #30363d; padding: 8px 16px; border-radius: 6px; transition: all 0.2s; }
-    .contact-link:hover { border-color: #58a6ff; color: #58a6ff; }
+    .contact-link { 
+      display: flex; 
+      align-items: center; 
+      gap: 6px; 
+      color: #8b949e; 
+      text-decoration: none; 
+      font-size: 14px; 
+      border: 0.5px solid var(--border); 
+      padding: 8px 16px; 
+      border-radius: 6px; 
+      transition: all 0.2s;
+      opacity: 0;
+    }
+    
+    .contact-link.fade-in {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
 
-    .divider { border: none; border-top: 0.5px solid #30363d; margin: 0; }
-    .footer { text-align: center; padding: 1.5rem; font-size: 12px; color: #484f58; border-top: 0.5px solid #30363d; }
+    .divider { border: none; border-top: 0.5px solid var(--border); margin: 0; }
+    .footer { text-align: center; padding: 1.5rem; font-size: 12px; color: #484f58; border-top: 0.5px solid var(--border); }
 
-    @media (max-width: 600px) {
+    .skill-card:nth-child(1){animation-delay:.05s;}
+.skill-card:nth-child(2){animation-delay:.10s;}
+.skill-card:nth-child(3){animation-delay:.15s;}
+.skill-card:nth-child(4){animation-delay:.20s;}
+.skill-card:nth-child(5){animation-delay:.25s;}
+.skill-card:nth-child(6){animation-delay:.30s;}
+.skill-card:nth-child(7){animation-delay:.35s;}
+.skill-card:nth-child(8){animation-delay:.40s;}
+.skill-card:nth-child(9){animation-delay:.45s;}
+.skill-card:nth-child(10){animation-delay:.50s;}
+.skill-card:nth-child(11){animation-delay:.55s;}
+.skill-card:nth-child(12){animation-delay:.60s;}
+.skill-card:nth-child(13){animation-delay:.65s;}
+
+.project-card:nth-child(1){animation-delay:.1s;}
+.project-card:nth-child(2){animation-delay:.2s;}
+.project-card:nth-child(3){animation-delay:.3s;}
+.project-card:nth-child(4){animation-delay:.4s;}
+.project-card:nth-child(5){animation-delay:.5s;}
+.project-card:nth-child(6){animation-delay:.6s;}
+.project-card:nth-child(7){animation-delay:.7s;}
+
+.process-card:nth-child(1){animation-delay:.1s;}
+.process-card:nth-child(2){animation-delay:.2s;}
+.process-card:nth-child(3){animation-delay:.3s;}
+.process-card:nth-child(4){animation-delay:.4s;}
+
+.faq-item:nth-child(1){animation-delay:.1s;}
+.faq-item:nth-child(2){animation-delay:.2s;}
+.faq-item:nth-child(3){animation-delay:.3s;}
+.faq-item:nth-child(4){animation-delay:.4s;}
+
+.contact-link:nth-child(1){animation-delay:.1s;}
+.contact-link:nth-child(2){animation-delay:.2s;}
+.contact-link:nth-child(3){animation-delay:.3s;}
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      
+      .hero { padding: 4rem 1.5rem 3rem; }
       .hero h1 { font-size: 32px; }
       .hero p { font-size: 15px; }
+      
+      .section { padding: 3rem 1.5rem; }
+      .section-heading { font-size: 18px; }
+      
+      .projects-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr; }
+      
       .stats-row { grid-template-columns: repeat(3, 1fr); }
-      .nav-links { gap: 1rem; }
     }
   </style>
 </head>
 <body>
 
   <nav class="nav">
-    <a class="nav-logo" href="#">Epiphany</a>
-    <div class="nav-links">
+    <a class="nav-logo" href="#">epiphany</a>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <div class="nav-dropdown" id="navDropdown">
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+    </div>
+    <div class="nav-links" id="navLinks">
       <a href="#skills">skills</a>
       <a href="#projects">projects</a>
       <a href="#contact">contact</a>
@@ -103,7 +269,7 @@
   </nav>
 
   <section class="hero">
-    <p class="hero-tag">Full-stack developer</p>
+    <p class="hero-tag">web developer</p>
     <h1>Scalable APIs, clean code,<br>real <span>deployments.</span></h1>
     <p>I build REST APIs, databases, and automation systems using Python, Django, FastAPI, and PostgreSQL. Production-ready from day one.</p>
     <div class="hero-btns">
@@ -154,6 +320,9 @@
       <div class="project-card">
         <span class="project-tag">backend</span>
         <h3>Student Management Platform</h3>
+        <div class="project-tech">
+          Python • Django • DRF • PostgreSQL • Docker • GitHub Actions
+        </div>
         <p>Multi-institution student data platform with Django, DRF, PostgreSQL, Docker, and CI/CD in production. NDA project.</p>
         <div class="project-links">
           <span style="font-size: 13px; color: #8b949e;">Private repository</span>
@@ -162,15 +331,21 @@
       <div class="project-card">
         <span class="project-tag">fullstack</span>
         <h3>Truth or Dare Web App</h3>
+        <div class="project-tech">
+          Python • Django • PostgreSQL • JavaScript • AJAX • Render
+        </div>
         <p>Full-stack web game with Django backend, PostgreSQL, user auth, and AJAX frontend. Live deployment with real-time gameplay.</p>
         <div class="project-links">
-          <a href="https://truda-1.onrender.com" target="_blank">live demo</a>
-          <a href="https://github.com/epiphany-sama/truth-or-dare" target="_blank">github</a>
+          <a href="https://truda-1-gl2g.onrender.com" target="_blank">live demo</a>
+          <a href="https://github.com/epiphany-sama/Truda" target="_blank">github</a>
         </div>
       </div>
       <div class="project-card">
         <span class="project-tag">backend</span>
         <h3>Email Automation System</h3>
+        <div class="project-tech">
+          Python • SMTP • Scheduling
+        </div>
         <p>Automated email dispatch system using Python, smtplib, and scheduled workflows for sending emails based on data.</p>
         <div class="project-links">
           <a href="https://github.com/epiphany-sama/email-automation" target="_blank">github</a>
@@ -179,7 +354,10 @@
       <div class="project-card">
         <span class="project-tag">backend</span>
         <h3>Authentication and Verification System</h3>
-        <p>Multi-stage authentication workflows with Django REST Framework, Gmail API integration, and email verification. NDA project.</p>
+        <div class="project-tech">
+          Python • Django • DRF • Gmail API • FastApi
+        </div>
+        <p>Multi-stage authentication workflows with Django REST Framework, fastApi, Gmail API integration, and email verification. NDA project.</p>
         <div class="project-links">
           <span style="font-size: 13px; color: #8b949e;">Private repository</span>
         </div>
@@ -187,6 +365,9 @@
       <div class="project-card">
         <span class="project-tag">backend</span>
         <h3>Video Communication Plugin</h3>
+        <div class="project-tech">
+          Python • FastAPI • Daily.co • REST API
+        </div>
         <p>Third-party video integration using FastAPI and Daily.co for real-time communication features. NDA project.</p>
         <div class="project-links">
           <span style="font-size: 13px; color: #8b949e;">Private repository</span>
@@ -195,6 +376,9 @@
       <div class="project-card">
         <span class="project-tag">backend</span>
         <h3>Face Detector</h3>
+        <div class="project-tech">
+          Python • OpenCV • NumPy
+        </div>
         <p>Computer vision project for detecting and identifying faces in images and video streams.</p>
         <div class="project-links">
           <a href="https://github.com/epiphany-sama/face-detector" target="_blank">github</a>
@@ -203,6 +387,9 @@
       <div class="project-card">
         <span class="project-tag">backend</span>
         <h3>Web Scraper</h3>
+        <div class="project-tech">
+          Python • BeautifulSoup • Requests
+        </div>
         <p>Python web scraper using BeautifulSoup and requests to extract data from websites.</p>
         <div class="project-links">
           <a href="https://github.com/epiphany-sama/Web-scraper" target="_blank">github</a>
@@ -248,11 +435,12 @@
   </section>
 
   <section class="contact" id="contact">
+    <p class="section-title">get in touch</p>
     <h2 class="section-heading">contact</h2>
     <p>Open to backend, fullstack, and AI roles. Feel free to reach out via email, GitHub, or LinkedIn.</p>
     <div class="contact-links">
       <a class="contact-link" href="mailto:ishaqnazil16@gmail.com"><i class="ti ti-mail" aria-hidden="true"></i> email</a>
-      <a class="contact-link" href="https://linkedin.com/in/nazil-ishaq" target="_blank"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> linkedin</a>
+      <a class="contact-link" href="https://linkedin.com/in/nazil-ishaq-375b0738a" target="_blank"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> linkedin</a>
       <a class="contact-link" href="https://github.com/epiphany-sama" target="_blank"><i class="ti ti-brand-github" aria-hidden="true"></i> github</a>
     </div>
   </section>
@@ -260,9 +448,43 @@
   <div class="footer">© 2026 Nazil Ishaq. built with intention.</div>
 
   <script>
+    function toggleMenu() {
+      const dropdown = document.getElementById('navDropdown');
+      dropdown.classList.toggle('open');
+    }
+
+    // Close menu when link is clicked
+    document.querySelectorAll('.nav-dropdown a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navDropdown').classList.remove('open');
+      });
+    });
+
+    // Scroll-triggered animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.skill-card, .project-card, .process-card, .faq-item, .contact-link').forEach(el => {
+      observer.observe(el);
+    });
+
+    // FAQ toggle
     document.querySelectorAll('.faq-item').forEach(item => {
       item.addEventListener('click', () => item.classList.toggle('open'));
     });
+
+    // Skill filter
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
